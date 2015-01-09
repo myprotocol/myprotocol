@@ -3,7 +3,7 @@ set :repo_url, 'git@github.com:jakejuby/myprotocol.git'
 
 set :deploy_to, '/home/rails/myprotocol'
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 
 namespace :deploy do
