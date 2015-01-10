@@ -3,10 +3,12 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   def index
+    auth_redirect unless current_user.admin?
     @profiles = Profile.all
   end
 
   def show
+    auth_redirect unless current_user.admin? or current_user.profile == @profile
   end
 
   def new
@@ -18,9 +20,11 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    auth_redirect unless current_user.admin? or current_user.profile == @profile
   end
 
   def create
+    auth_redirect unless current_user.profile.nil?
     @profile = Profile.new(profile_params)
 
     @profile.user = current_user
@@ -33,6 +37,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    auth_redirect unless current_user.admin? or current_user.profile == @profile
     if @profile.update(profile_params)
       redirect_to @profile, notice: 'Profile was successfully updated.'
     else
@@ -41,6 +46,7 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
+    auth_redirect unless current_user.admin? or current_user.profile == @profile
     @profile.destroy
     redirect_to profiles_url, notice: 'Profile was successfully destroyed.'
   end
@@ -48,6 +54,10 @@ class ProfilesController < ApplicationController
 private
   def set_profile
     @profile = Profile.find(params[:id])
+  end
+
+  def auth_redirect
+    redirect_to controller: 'home', action: 'index'
   end
 
   def profile_params

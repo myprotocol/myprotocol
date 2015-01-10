@@ -6,16 +6,23 @@ class GymsController < ApplicationController
   end
 
   def show
+    auth_redirect unless current_user.admin? or current_user.profile == @profile
   end
 
   def new
-    @gym = Gym.new
+    if current_user.gym.nil?
+      @gym = Gym.new
+    else
+      redirect_to action: 'edit', id: current_user.gym.id
+    end
   end
 
   def edit
+    auth_redirect unless current_user.admin? or current_user.gym == @gym
   end
 
   def create
+    auth_redirect unless current_user.gym.nil?
     @gym = Gym.new(gym_params)
 
     @gym.user = current_user
@@ -28,6 +35,7 @@ class GymsController < ApplicationController
   end
 
   def update
+    auth_redirect unless current_user.admin? or current_user.gym == @gym
     if current_user.gym.update(gym_params)
       redirect_to current_user.gym, notice: 'Gym was successfully updated.'
     else
@@ -43,6 +51,10 @@ class GymsController < ApplicationController
   private
     def set_gym
       @gym = Gym.find(params[:id])
+    end
+
+    def auth_redirect
+      redirect_to controller: 'home', action: 'index'
     end
 
     def gym_params

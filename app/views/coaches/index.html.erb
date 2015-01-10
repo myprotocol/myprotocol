@@ -5,6 +5,7 @@
   <table class="table profiler">
     <thead>
       <tr>
+        <th>Image</th>
         <th>Name</th>
         <th>email</th>
         <th>business</th>
@@ -14,13 +15,13 @@
         <th>zip</th>
         <th>phone_number</th>
         <th>shirt size</th>
-        <th colspan="2"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @coaches.each do |coach| %>
         <tr>
+          <td><%= image_tag coach.image_url.to_s if coach.image_url.present? %></td>
           <td><%= coach.name %></td>
           <td><%= coach.user.email %></td>
           <td><%= coach.business %></td>
@@ -30,8 +31,6 @@
           <td><%= coach.zip %></td>
           <td><%= coach.phone_number %></td>
           <td><%= coach.shirt_size %></td>
-          <td class="buttons"><%= link_to 'Edit', edit_coach_path(coach) %></td>
-          <td class="buttons"><%= link_to 'Destroy', coach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>

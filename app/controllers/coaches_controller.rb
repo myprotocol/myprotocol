@@ -1,6 +1,6 @@
 class CoachesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_coach, only: [:show, :edit, :update, :destroy]
+  before_action :set_coach, only: [:show, :edit, :update]
 
   def index
     @coaches = Coach.all
@@ -18,9 +18,11 @@ class CoachesController < ApplicationController
   end
 
   def edit
+    auth_redirect unless current_user.admin? or current_user.coach == @coach
   end
 
   def create
+    auth_redirect unless current_user.coach.nil?
     @coach = Coach.new(coach_params)
 
     @coach.user = current_user
@@ -33,6 +35,7 @@ class CoachesController < ApplicationController
   end
 
   def update
+    auth_redirect unless current_user.admin? or current_user.coach == @coach
     if @coach.update(coach_params)
       redirect_to @coach, notice: 'Coach was successfully updated.'
     else
@@ -41,13 +44,17 @@ class CoachesController < ApplicationController
   end
 
   def destroy
-    @coach.destroy
+    current_user.coach.destroy
     redirect_to coaches_url, notice: 'Coach was successfully destroyed.'
   end
 
 private
   def set_coach
     @coach = Coach.find(params[:id])
+  end
+
+  def auth_redirect
+    redirect_to controller: 'home', action: 'index'
   end
 
   def coach_params
