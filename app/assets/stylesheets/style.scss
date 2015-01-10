@@ -98,7 +98,7 @@ body{
 			width: 800px;
 			height: 140px;
 			display: block;
-			background: image-url(/assets/logo.png) 50% 50% no-repeat;
+			background: image-url("logo.png") 50% 50% no-repeat;
 			background-size: 100%;
 			margin: 200px auto 0 auto;
 		}
@@ -176,7 +176,7 @@ body{
 				margin-bottom: 30px;
 				border-bottom: 1px solid #333333;
 			}
-			.form-area{	
+			.form-area{
 				height: 33px;
 				display: block;
 				margin-bottom: 5px;
@@ -204,7 +204,7 @@ body{
 					outline: none;
 					background: transparent;
 					color: white;
-					font-weight: bold; 
+					font-weight: bold;
 				}
 				input[type="submit"]{
 					margin-left: 30%;
@@ -267,7 +267,7 @@ body{
 	.personal{
 		border-bottom: 1px solid #333333;
 		margin-bottom: 20px;
-		margin-top: 30px; 
+		margin-top: 30px;
 	}
 	.protocol{
 		margin-bottom: 40px;
@@ -316,9 +316,9 @@ body{
 		position: relative;
 		z-index: 4;
 		margin-top: 50px;
-		.title{	
+		.title{
 			display: inline-block;
-			text-align: center; 
+			text-align: center;
 			font-size: 20px;
 			text-transform: uppercase;
 			font-weight: bold;
