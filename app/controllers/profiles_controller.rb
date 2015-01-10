@@ -30,7 +30,7 @@ class ProfilesController < ApplicationController
     @profile.user = current_user
 
     if @profile.save
-      redirect_to @profile, notice: 'Profile was successfully updated.'
+      redirect_to controller: 'home', action: 'index', notice: 'Profile was successfully updated.'
     else
       render :new
     end
