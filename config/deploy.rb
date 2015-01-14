@@ -1,5 +1,5 @@
 set :application, 'myprotocol'
-set :repo_url, 'git@github.com:jakejuby/myprotocol.git'
+set :repo_url, 'git@github.com:myprotocol/myprotocol.git'
 
 set :deploy_to, '/home/rails/myprotocol'
 
