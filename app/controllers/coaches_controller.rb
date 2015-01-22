@@ -3,7 +3,11 @@ class CoachesController < ApplicationController
   before_action :set_coach, only: [:show, :edit, :update]
 
   def index
-    @coaches = Coach.all
+    if params[:zipcode].present?
+      @coaches = Coach.closest_coaches(params[:zipcode])
+    else
+      @coaches = Coach.all
+    end
   end
 
   def show

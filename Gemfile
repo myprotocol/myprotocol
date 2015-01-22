@@ -20,6 +20,8 @@ gem 'geocoder'
 gem 'smarter_csv'
 gem 'carrierwave'
 gem 'therubyracer',  platforms: :ruby
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-bundler', '~> 1.1.2'

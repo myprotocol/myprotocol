@@ -14,21 +14,35 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min
+//= require underscore
+//= require gmaps/google
 //= require_tree .
 
 $('#myModal').on('shown.bs.modal', function () {
 	$('#myInput').focus()
 })
 
-$(function() {                      
-  $("#coach").click(function() {  
+$(function() {
+	handler = Gmaps.build('Google');
+	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+		markers = handler.addMarkers([
+		{
+			"lat": 0,
+			"lng": 0,
+			"infowindow": "hello!"
+		}
+		]);
+		handler.bounds.extendWith(markers);
+		handler.fitMapToBounds();
+	});
+  $("#coach").click(function() {
   	$('.active').removeClass('active');
     $(this).addClass("active");
-    $('.coach').addClass('active');    
+    $('.coach').addClass('active');
   })
-  $("#gym").click(function() {  
+  $("#gym").click(function() {
   	$('.active').removeClass('active');
-    $(this).addClass("active");    
+    $(this).addClass("active");
     $('.gym').addClass('active');
   })
 });

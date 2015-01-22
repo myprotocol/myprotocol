@@ -7,7 +7,7 @@ class Profile < ActiveRecord::Base
 
   GENDERS = %w(M F)
   BODY_TYPES = ['lean', 'toned', 'muscular', 'couple extra pounds', 'heavy']
-  BLOOD_TYPES = %w(A+ A- B+ B- AB+ AB- O+ O-)
+  BLOOD_TYPES = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'not sure']
   VEGGIE_OPTIONS = ['None', 'Not a lot', 'I know I need more', 'Just right', 'More then you know']
   ACTIVITY_LEVELS = ['Zero Activity', 'Some Activity', 'Average Activity', 'More Active then normal', 'Extremely Active']
 
