@@ -1,0 +1,21 @@
+$(".coaches.index").ready(function() {
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    var markers = handler.addMarkers([
+      {
+        "lat": 25.7738889,
+        "lng": -80.1938889
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(14);
+  });
+
+  $("#search-form").on("ajax:success", function(e, data, status, xhr) {
+    var markers = handler.addMarkers(JSON.parse(xhr.responseText));
+    console.log(JSON.parse(xhr.responseText));
+  }).on("ajax:error", function(e, xhr, status, error) {
+    console.log("ERROR");
+  });
+});

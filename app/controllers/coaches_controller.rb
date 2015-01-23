@@ -3,11 +3,18 @@ class CoachesController < ApplicationController
   before_action :set_coach, only: [:show, :edit, :update]
 
   def index
-    if params[:zipcode].present?
-      @coaches = Coach.closest_coaches(params[:zipcode])
-    else
-      @coaches = Coach.all
+    @coaches = Coach.gcoded
+  end
+
+  def search
+    @coaches = Coach.closest_coaches(params[:zipcode]) if params[:zipcode].present?
+    @hash = Gmaps4rails.build_markers(@coaches) do |coach, marker|
+      if coach and coach.latitude and coach.longitude
+        marker.lat coach.latitude
+        marker.lng coach.longitude
+      end
     end
+    render json: @hash.to_json
   end
 
   def show

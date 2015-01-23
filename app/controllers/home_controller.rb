@@ -5,8 +5,8 @@ class HomeController < ApplicationController
         @closest_coaches = Coach.first(3)
         @closest_gyms = Gym.first(3)
       else
-        @closest_coaches = Coach.closest_coaches(current_user.profile.zipcode)
-        @closest_gyms = Gym.closest_gyms(current_user.profile.zipcode)
+        @closest_coaches = Coach.closest_coaches(current_user.profile.zipcode).first(3)
+        @closest_gyms = Gym.closest_gyms(current_user.profile.zipcode).first(3)
       end
     end
   end

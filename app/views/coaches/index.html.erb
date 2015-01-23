@@ -1,46 +1,11 @@
 <div class="container-fluid no-pad landing_two"></div>
 <div id="profiles">
-  <h2>Listing coaches</h2>
-
-  <table class="table profiler">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>email</th>
-        <th>business</th>
-        <th>street</th>
-        <th>city</th>
-        <th>state</th>
-        <th>zip</th>
-        <th>phone_number</th>
-        <th>shirt size</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @coaches.each do |coach| %>
-        <tr>
-          <td><%= image_tag coach.image_url.to_s if coach.image_url.present? %></td>
-          <td><%= coach.name %></td>
-          <td><%= coach.user.email %></td>
-          <td><%= coach.business %></td>
-          <td><%= coach.street %></td>
-          <td><%= coach.city %></td>
-          <td><%= coach.state %></td>
-          <td><%= coach.zip %></td>
-          <td><%= coach.phone_number %></td>
-          <td><%= coach.shirt_size %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <br>
-
+  <%= form_tag(search_coaches_path, method: "get", remote: true, id: 'search-form') do %>
+    <%= label_tag(:zipcode) %>
+    <%= text_field_tag(:zipcode) %>
+    <%= submit_tag("Search") %>
+  <% end %>
   <div style='width: 800px;'>
     <div id="map" style='width: 800px; height: 400px;'></div>
   </div>
-
-  <div class="col-md-12 no-pad"><%= link_to 'New Coach', new_coach_path, :class => "new" %></div>
 </div>

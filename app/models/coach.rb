@@ -22,20 +22,16 @@ class Coach < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :gcoded, -> { where("latitude NOT NULL AND longitude NOT NULL") }
+
   def city_address
     [city, state, zip].join(', ')
   end
 
   def self.closest_coaches(zipcode)
     answer = near(zipcode, 50).to_a
-    if answer.empty?
-      answer = first(3)
-    elsif answer.size > 3
-      answer = answer.first(3)
-    else
-      while answer.size < 3
-        answer << all.sample
-      end
+    while answer.length < 3
+      answer.push gcoded.sample
     end
     answer
   end
