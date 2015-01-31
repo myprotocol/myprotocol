@@ -12,6 +12,7 @@ class CoachesController < ApplicationController
       if coach and coach.latitude and coach.longitude
         marker.lat coach.latitude
         marker.lng coach.longitude
+        marker.infowindow coach.name
       end
     end
     render json: @hash.to_json

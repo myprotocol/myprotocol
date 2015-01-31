@@ -4,7 +4,8 @@ $(".coaches.index").ready(function() {
     var markers = handler.addMarkers([
       {
         "lat": 25.7738889,
-        "lng": -80.1938889
+        "lng": -80.1938889,
+        "infowindow": "hello!"
       }
     ]);
     handler.bounds.extendWith(markers);
@@ -14,6 +15,8 @@ $(".coaches.index").ready(function() {
 
   $("#search-form").on("ajax:success", function(e, data, status, xhr) {
     var markers = handler.addMarkers(JSON.parse(xhr.responseText));
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
     console.log(JSON.parse(xhr.responseText));
   }).on("ajax:error", function(e, xhr, status, error) {
     console.log("ERROR");
